@@ -1,0 +1,60 @@
+<%- include("../partials/header.ejs") %>
+
+<section class="py-5 text-center container sort-header">
+  <div class="sortby">
+    Sort by
+  </div>  
+  <!-- <div class="filterby">
+    Filter
+  </div> -->
+  
+  <div class="sortby-element">
+    <div class="sortby-element-name">
+      <a href="/products/category/<%=categoryid%>/az" style="text-decoration:none">name a-z</a>
+    </div>
+    <div class="sortby-element-name">
+      <a href="/products/category/<%=categoryid%>/za" style="text-decoration:none">name z-a</a>
+    </div>
+    <div class="sortby-element-price">
+      <a href="/products/category/<%=categoryid%>/low" style="text-decoration:none">lowest price</a>
+    </div>
+    <div class="sortby-element-price">
+      <a href="/products/category/<%=categoryid%>/high" style="text-decoration:none">highest price</a>
+    </div>
+  </div> 
+
+  <!-- <div class="filter-element">
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange1">
+    </div>
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
+    </div>
+  </div> -->
+  </section>
+
+  <div class="lol"></div>
+
+  <div class="container-fluid bg-trasparent my-4 p-3 con-card" style="position: relative;">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+
+      <% products.forEach(function(products){ %>
+      <div class="col">
+        <div class="card h-100 shadow-sm"> <img src="<%= products.image %>" class="card-img" alt="...">
+            <div class="card-body">
+                <!-- <div class="label-top shadow-sm">Asus Rog</div> -->
+                <div class="clearfix mb-3"> 
+                  <!-- <span class="float-start badge rounded-pill bg-primary">ASUS Rog</span>  -->
+                  <span class="float-end price-hp"><%= products.price.toLocaleString(); %>฿</span> 
+                </div>
+                <h5 class="card-title"><%= products.name %></h5>
+                <div class="text-center my-4"> <a href="/products/<%= products._id %>" class="btn btn-warning">Check offer</a> </div>
+            </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+
+
+<%- include("../partials/footer.ejs") %>

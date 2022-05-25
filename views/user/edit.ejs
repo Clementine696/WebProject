@@ -1,0 +1,35 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container">
+
+    <h1>Edit your profile</h1>
+
+    <form action="/user/<%= user._id %>/u/edit?_method=PUT" method="POST" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label class="form-label">Firstname</label>
+        <input type="text" class="form-control" name="firstName" placeholder="<%= user.firstName %>", value = "<%= user.firstName %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Lastname</label>
+        <input type="text" class="form-control" name="lastName" placeholder="<%= user.lastName %>" , value = "<%= user.lastName %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" name="email" placeholder="<%= user.email %>" , value = "<%= user.email %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Images</label>
+        <img src="<%= user.profileImage %>" height="300px">
+        <input type="file" class="form-control" name="image" accept="image/*">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/user/<%= user._id %>/profile" >Go back</a>
+    </form>
+
+</div>
+  <%- include("../partials/footer.ejs") %>

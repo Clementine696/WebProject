@@ -1,0 +1,35 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container product-edit">
+
+    <h1>Edit your product</h1>
+
+    <form action="/products/<%= product._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="product[name]" placeholder="<%= product.name %>", value = "<%= product.name %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="text" class="form-control" name="product[price]" placeholder="<%= product.price %>" , value = "<%= product.price %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Images</label>
+        <img src="<%= product.image %>" height="300px">
+        <input type="file" class="form-control" name="image" accept="image/*">
+    </div>
+
+    <label class="form-label">Description</label>
+    <div class="textarea-admin">
+        <textarea name="product[description]" rows="6" cols="60" placeholder="<%= product.description %>", value = "<%= product.description%>"><%= product.description%></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/products" >Go back</a>
+    </form>
+
+</div>
+  <%- include("../partials/footer.ejs") %>

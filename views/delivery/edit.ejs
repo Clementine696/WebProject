@@ -1,0 +1,61 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="user-edit-show">
+
+
+<div class="container">
+
+    <h1>Edit your address</h1>
+
+    <form action="/user/<%= currentUser._id %>/<%= address._id %>?_method=PUT" method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Set address name</label>
+            <input type="text" class="form-control" name="address[address_name]" placeholder="name", value = "<%= address.address_name %>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Receiver name</label>
+            <input type="text" class="form-control" name="address[receiver]" placeholder="receiver", value = "<%= address.receiver %>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Telephone</label>
+            <input type="number" class="form-control" name="address[tel]" placeholder="telephone", value = "<%= address.tel %>">
+        </div>
+
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <input type="text" class="form-control" name="address[houseaddress]" placeholder="<%= address.houseaddress %>", value = "<%= address.houseaddress %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Sub-district</label>
+        <input type="text" class="form-control" name="address[sub_district]" placeholder="address.sub_district", value = "<%= address.sub_district %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">District</label>
+        <input type="text" class="form-control" name="address[district]" placeholder="address.district", value = "<%= address.district %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Province</label>
+        <input type="text" class="form-control" name="address[province]" placeholder="address.province", value = "<%= address.province %>">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Zipcode</label>
+        <input type="number" class="form-control" name="address[zipcode]" placeholder="address.zipcode", value = "<%= address.zipcode %>">
+    </div>
+    <!-- <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="textarea" class="form-control" name="product[description]" placeholder="Description">
+    </div> -->
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/user/<%= currentUser._id %>/delivery" >Go back</a>
+    </form>
+</div>
+</div>
+  <%- include("../partials/footer.ejs") %>

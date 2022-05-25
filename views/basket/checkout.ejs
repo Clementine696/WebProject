@@ -1,0 +1,61 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="checkout-all">
+
+<%let summary = 0; %>
+
+<% user.carts.forEach(function(cart){ %>
+
+    <% products.forEach(function(product){ %>
+        <% if(cart.product._id.equals(product._id)){ %>
+            <% summary += product.price * cart.quantity%>
+        <% } %>
+    <% }) %>
+<% }) %>
+
+<% summary += user.carts.length * 50 %>
+
+
+<div class="checkout-sum">
+    <div class="basket-checkout">
+        <h2>Summary <%= summary.toLocaleString(); %>฿ </h2>
+    </div>
+</div>
+
+<form action="/user/<%= currentUser._id %>/checkoutconfirm" method="POST">
+    <div class="checkout-delivery">
+        <p>Delivery Address</p>
+        <label for="select_deli"></label>
+        <select name="select_deli" id="select_deli" type="Selection">
+        <% user.addresses.forEach(function(address){ %>
+            <option value="<%= address._id %>">
+                <p class="delivery-text"> <%=address.address_name%> : </p>
+                <p class="delivery-text"> <%=address.receiver%> </p>
+                <p class="delivery-text"> <%=address.tel%> </p>
+                <p class="delivery-text"> , <%=address.houseaddress%> </p>
+                <p class="delivery-text"> <%=address.sub_district%> </p>
+                <p class="delivery-text"> <%=address.district%> </p>
+                <p class="delivery-text"> <%=address.province%> </p>
+                <p class="delivery-text"> <%=address.zipcode%> </p>
+            </option>
+        <% }) %>
+        </select>
+    </div>
+
+
+    <div class="checkout-payment">
+        <p>Payment Method</p>
+        <label for="select_paym"></label>
+        <select name="select_paym" id="select_paym" type="Selection">
+        <%  user.payments.forEach(function(payment){ %>
+
+            <option value="<%= payment._id %>">Visa ending <%= payment.card_number%10000 %></option>
+        <% }) %>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Confirm</button>
+
+</form>
+</div>
+<%- include("../partials/footer.ejs") %>

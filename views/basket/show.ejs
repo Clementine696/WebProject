@@ -1,0 +1,116 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="basket">
+
+    <div class="basket-header">
+        <h1>Your Basket</h1>
+    </div>
+
+<% if(user.carts.length != 0){ %> 
+
+
+<div class="cart-container container-fluid">
+
+    <div class="cart-image-box">
+        <p>Image</p>
+    </div>
+
+    <div class="cart-title">
+        <p>Name</p>
+    </div>
+
+    <div class="cart-price">
+        <p>Price</p>
+    </div>
+
+    <div class="cart-quantity">
+        <p> Quantity</p>
+    </div>
+
+    <div class="cart-remove">
+        <p> Remove</p>
+    </div>
+
+</div>
+
+<%let summary = 0; %>
+
+<% user.carts.forEach(function(cart){ %>
+
+    <% products.forEach(function(product){ %>
+
+
+        <% if(cart.product._id.equals(product._id)){ %>
+
+            <% summary += product.price * cart.quantity%>
+
+            <div class="cart-container container-fluid">
+
+                <div class="cart-image-box">
+                    <img class="cart-img" src="<%= product.image%>" height="200px">
+                </div>
+
+                <div class="cart-title">
+                    <p> <%= product.name %> </p>
+                </div>
+
+                <div class="cart-price">
+                    <p class="price"> <%= product.price.toLocaleString(); %>฿</p>
+                </div>
+
+                <div class="cart-quantity cart-quantity-show">
+
+                    <form action="/user/quantity/<%= currentUser._id %>/<%= cart._id %>" method="POST">
+                        <label for="selectt"></label>
+                            <select name="selectt" id="selectt" type="Selection" onchange='this.form.submit()'>
+
+                                <% for (let i = 1; i <= 5; i++) {   %>
+                                <%     if(i==cart.quantity){ %>
+                                        <option value="<%= cart.quantity %>" disabled selected><%= cart.quantity %></option>
+                                <%     }else{                       %>
+                                        <option value="<%= i %>"> <%= i %></option>
+                                <%     }                            %>
+                                <% }                                %>
+
+                            </select>
+                    </form>
+                </div>
+                
+                <div class="cart-remove cart-remove-show">
+                    <form action="/user/remove/<%= currentUser._id %>/<%= cart._id %>" method="POST">
+                        <button type="submit" class="btn btn-primary">Remove</button>
+                    </form>
+                </div>
+            </div>
+
+        <% } %>
+            
+    <% }) %>
+<% }) %>
+
+<div class="basket-sum">
+    <div class="basket-checkout">
+        <h2>Summary <%= summary.toLocaleString(); %>฿ + Delivery price <%= user.carts.length * 50%>฿</h2>
+    </div>
+    
+
+    <div class="basket-checkout-btn">
+        <!-- <form action="/user/<%= currentUser._id %>/checkout" method="GET">
+            <button type="submit" class="btn btn-primary">Check Out</button>
+        </form> -->
+        <a href="/user/<%= currentUser._id %>/checkout" class="basket-checkout-btn-btn">Checkout</a>
+
+    </div>
+
+</div>
+
+<% }else{ %>
+
+    <p class="basket-empty">
+        Your basket is empty
+    </p>
+
+<% } %>
+</div>
+
+<%- include("../partials/footer.ejs") %>

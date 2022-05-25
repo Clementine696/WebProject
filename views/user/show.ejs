@@ -1,0 +1,35 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="user-show-top">
+    <h1 class="user-show-username">Hi, <%= user.username%></h1>
+
+    <img src="<%= user.profileImage %>" height="240px">
+
+    <% if(currentUser && currentUser.isAdmin) { %>
+        <h2 class="user-show-youareadmin">You are admin</h2>
+    <% } %>
+</div>
+
+
+<!-- <p>
+    <a href="mailto: <%= user.email %>"><%= user.email %></a>
+</p> -->
+<div class="user-show-menu">
+
+    <div class="user-show-myacc">
+        <h2 class="user-show-myacc-header">My Account</h2>
+        <p> <a href="/user/<%= currentUser._id %>/profile" class="profile-btn">Profile</a> </p>
+        <p> <a href="/user/<%= currentUser._id %>/delivery " class="profile-btn">Delivery Address</a> </p>
+        <p> <a href="/user/<%= currentUser._id %>/payment" class="profile-btn">Payment Method</a> </p>
+    </div>
+    
+    <div class="user-show-myprc">
+        <h2 class="user-show-myacc-header"> My purchase </h2>
+        <p> <a href="/user/<%= currentUser._id %>/history" class="profile-btn">History</a> </p>
+    </div>
+    
+</div>
+
+
+
+<%- include("../partials/footer.ejs") %>

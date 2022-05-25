@@ -1,0 +1,31 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="payment-show">
+
+    <h1>Hi <%= user.username%></h1>
+
+    <a href="/user/<%= user._id %>/new_payment" class="btn btn-sm btn-outline-secondary">Add new payment</a>
+
+
+    
+    <%if(user.payments)%>
+        <p>You have <%=user.payments.length%> payment method</p>
+
+    <div class="delivery-show">
+
+    <% user.payments.forEach(function(payment){ %>
+
+        <form id="delete-form" action ="/user/<%= user._id %>/p/<%= payment._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-sm btn-outline-secondary delivery-button" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+        </form>
+
+        <p class="delivery-text"> <%=payment.card_owner%> : </p>
+        <p class="delivery-text"> Visa ending <%= payment.card_number%10000 %></p>
+        <br>
+    <% }) %>
+
+    </div>
+
+</div>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,157 @@
+<%- include("../partials/header.ejs") %>
+<div class="product-show">
+        <h1 class="product-show-name"><%= product.name %></h1>
+        <img class="product-show-img" src="<%= product.image %>">
+        <%if (currentUser && currentUser.isAdmin) { %>
+        <p class="product-show-price">Price: <%= product.price.toLocaleString(); %>฿</p>
+        <% } %>
+        
+</div>
+
+<div class="product-show-description">
+        <h2>Description:</h2>
+        <textarea class="product-show-description-data product-show-textarea" readonly class="textarea-product" rows="6" cols="60"><%= product.description %></textarea>
+</div>
+
+<div class="product-show-admin">
+        <%if (currentUser && currentUser.isAdmin) { %>
+        <a href="/products/<%= product._id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+        
+        <form id="delete-form" action ="/products/<%= product._id %>?_method=DELETE" method="POST">
+        <button type="submit" class="btn btn-sm btn-outline-secondary" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+        </form>
+        <% }else{ %>
+</div>
+
+
+        <!-- <a href="/products/<%= product._id %>/addtocart" class="btn btn-sm btn-outline-secondary">Add to basket</a> -->
+
+<div class="product-show-basket">
+
+        <p class="product-show-price">Price: <%= product.price.toLocaleString(); %>฿</p>
+        
+        <div class="product-show-basket-qty">
+                <button class="input-qty-button" id="input-minus">-</button>
+                <!-- <input type="number" class="col-sm-2" id ="input-count" value = "1"> -->
+                <span class="col-sm-2" id ="input-count" name="input_count">1</span>
+                <button class="input-qty-button" id="input-plus">+</button>
+        </div>
+
+        
+
+
+        <form action="/products/<%= product._id %>/addtocart" method="POST">
+                <div class="mb-3">
+                        <input type="number" class="form-control" id="QTY" name="QTY" value="1" style="display:none;">
+                </div>
+
+                <div class="product-show-basket-add">
+                        <button type="submit" class="btn btn-primary">Add to basket</button>
+                        <!-- <a href="/products" >Go back</a> -->
+                </div>
+                
+        </form>
+
+</div>
+
+<% } %>
+
+<%if (currentUser && currentUser.isAdmin) { %>
+
+<% let summary = 0 %>
+
+<div class="admin-show-user">
+
+        <p> Buyer List</p>
+
+        <div class="admin-show-user-list">
+                <div class="admin-user-name">
+                        <p> Username </p>
+                </div>
+
+                <div class="admin-user-quantity">
+                        <p> Quantity </p>
+                </div>
+
+                <div class="admin-user-paydate">
+                        <p> Pay_Date </p>
+                </div>
+        
+        <% users.forEach(function(user){ %>
+                <% user.historys.forEach(function(cart){ %>
+                        <% if(cart.product._id.equals(product._id)){ %>
+
+                                <div class="admin-user-name">
+                                        <p> <%= user.username %> </p>
+                                </div>
+
+                                <div class="admin-user-quantity">
+                                        <p> <%= cart.quantity %> </p>
+                                        <% summary+= cart.quantity %>
+                                </div>
+
+                                <div class="admin-user-paydate-text">
+                                        <p> <%= cart.pay_date %> </p>
+                                </div>
+                                
+                        <% } %>
+                <% }) %>
+                
+        <% })%>
+
+        </div>
+
+</div>
+
+<div class="sold-count">
+        <p>Sold : <%= summary %></p>
+</div>
+
+<% } %>
+
+<script>
+        `YYYY-MM-DDTHH:mm:ss.sssZ`
+        var number = 1, /// number value
+        min = 1, /// min number
+        max = 5; /// max number
+
+        function qtyminus(){
+        if (number>min){
+                number = number-1; /// Minus 1 of the number
+                qty.innerHTML = number ; /// Display the value in place of the number
+                QTY.value  = number ;
+        }
+        if(number == min) {        
+                qty.style.color= "red";
+                setTimeout(function(){qty.style.color= "black"},500)
+        }
+        else {
+                qty.style.color="black";            
+        }
+}    
+
+        function qtyplus(){
+        if(number<max){
+                number = number+1;
+                qty.innerHTML = number ; /// Display the value in place of the number
+                QTY.value = number ;
+        }     
+        if(number == max){
+                qty.style.color= "red";
+                setTimeout(function(){qty.style.color= "black"},500)
+        } else {
+                qty.style.color= "black";
+        }
+}
+        const minus = document.querySelector('#input-minus');
+        minus.addEventListener('click', qtyminus);
+
+        const plus = document.querySelector('#input-plus');
+        plus.addEventListener('click', qtyplus);
+
+        const qty = document.querySelector('#input-count');
+
+        const QTY = document.querySelector('#QTY');
+</script>
+
+<%- include("../partials/footer.ejs") %>

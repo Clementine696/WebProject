@@ -1,0 +1,43 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="delivery-show-all">
+<h1>Hi <%= user.username%></h1>
+
+<a href="/user/<%= user._id %>/new_address" class="btn btn-sm btn-outline-secondary">Add new delivery address</a>
+
+<%if(user.addresses)%>
+    <p>You have address <%=user.addresses.length%> address</p>
+
+<div class="delivery-show">
+
+<% user.addresses.forEach(function(address){ %>
+
+    <a href="/user/<%= user._id %>/<%= address._id %>/edit" class="btn btn-sm btn-outline-secondary delivery-button">Edit</a>
+        
+    <form id="delete-form" action ="/user/<%= user._id %>/<%= address._id %>?_method=DELETE" method="POST">
+        <button type="submit" class="btn btn-sm btn-outline-secondary delivery-button" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+    </form>
+
+    <!-- <p class="delivery-text"> address : <%=address.houseaddress%> </p>
+    <p class="delivery-text"> sub-district : <%=address.sub_district%> </p>
+    <p class="delivery-text"> district : <%=address.district%> </p>
+    <p class="delivery-text"> province : <%=address.province%> </p>
+    <p class="delivery-text"> zipcode : <%=address.zipcode%> </p> -->
+
+    <p class="delivery-text"> <%=address.address_name%> : </p>
+    <p class="delivery-text"> <%=address.receiver%> </p>
+    <p class="delivery-text"> <%=address.tel%> </p>
+    <p class="delivery-text"> , <%=address.houseaddress%> </p>
+    <p class="delivery-text"> <%=address.sub_district%> </p>
+    <p class="delivery-text"> <%=address.district%> </p>
+    <p class="delivery-text"> <%=address.province%> </p>
+    <p class="delivery-text"> <%=address.zipcode%> </p>
+
+    <!-- <p class="delivery-text"> <%=address.address_name%> : <%=address.receiver%> <%=address.tel%>, <%=address.houseaddress%>  <%=address.sub_district%> <%=address.district%> <%=address.province%> <%=address.zipcode%> </p> -->
+
+    <br>
+<% }) %>
+
+</div>
+</div>
+<%- include("../partials/footer.ejs") %>

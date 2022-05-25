@@ -1,0 +1,40 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container product-new">
+
+    <h1>Add new product</h1>
+
+    <form action="/products" method="POST" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" name="product[name]" placeholder="Name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="text" class="form-control" name="product[price]" placeholder="Price">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Images</label>
+        <input type="file" class="form-control" name="image" accept="image/*" multiple>
+    </div>
+
+    <!-- <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="textarea" class="form-control" name="product[description]" placeholder="Description">
+    </div> -->
+
+    <label class="form-label">Description</label>
+    <div class="textarea-admin">
+    <textarea class="textarera-admin" name="product[description]" rows="6" cols="60" placeholder="Description">• Line1
+• Line2
+    </textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/products" >Go back</a>
+    </form>
+</div>
+  <%- include("../partials/footer.ejs") %>

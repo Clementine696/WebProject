@@ -1,0 +1,21 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="user-profile">
+
+    <div class="user-username">
+        <h1>Hi <%= user.username%></h1>
+        <img src="<%= user.profileImage %>" height="300px">
+    </div>
+    
+    <div class="user-profile-text">
+        <p> Email :
+            <a href="mailto: <%= user.email %>"><%= user.email %></a>
+        </p>
+
+        <p>Name : <%= user.firstName %> <%= user.lastName %></p>
+
+        <a href="/user/<%= currentUser._id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+        <a href="/user/<%= currentUser._id %>">Go back</a>
+    </div>
+</div>
+<%- include("../partials/footer.ejs") %>

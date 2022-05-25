@@ -1,0 +1,116 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="history">
+
+    <div class="history-header">
+        <h1>Your History</h1>
+    </div>
+
+<% if(user.historys.length != 0){ %> 
+
+    <div class="cart-container container-fluid">
+
+        <div class="history-image-box">
+            <p>Image</p>
+        </div>
+
+        <div class="history-title">
+            <p>Name</p>
+        </div>
+
+        <div class="history-price">
+            <p>Price</p>
+        </div>
+
+        <div class="history-quantity">
+            <p> Quantity</p>
+        </div>
+
+        <div class="history-date">
+            <p> Date</p>
+        </div>
+
+        <div class="history-delivery">
+            <p> Delivery</p>
+        </div>
+
+        <div class="history-payment">
+            <p> Payment</p>
+        </div>
+
+    </div>
+
+    <% user.historys.reverse(); %>
+
+    <% user.historys.forEach(function(cart){ %>
+
+        <% products.forEach(function(product){ %>
+
+            <% if(cart.product._id.equals(product._id)){ %>
+
+                <div class="cart-container container-fluid">
+
+                    <div class="history-image-box">
+                        <img class="cart-img" src="<%= product.image%>" height="200px">
+                    </div>
+
+                    <div class="history-title">
+                        <p> <%= product.name %> </p>
+                    </div>
+
+                    <div class="history-price">
+                        <p class="price"> <%= product.price.toLocaleString(); %>฿ + 50฿</p>
+                    </div>
+
+                    <div class="history-quantity history-quantity-show">
+                        <p> <%= cart.quantity %> </p>
+                    </div>
+
+                    <div class="history-date">
+                        <p> <%= cart.pay_date %> </p>
+                    </div>
+                    
+                    <% user.addresses.forEach(function(address){ %>
+
+                        <% if(cart.address._id.equals(address._id)){ %>
+
+                            <div class="history-delivery">
+                                <p> <%= address.address_name %> </p>
+                            </div>
+
+                        <% } %>
+
+                    <% }) %>
+
+                    <% user.payments.forEach(function(payment){ %>
+
+                        <% if(cart.payment._id.equals(payment._id)){ %>
+
+                            <div class="history-payment">
+                                <p> Visa ending <%= payment.card_number%10000 %> </p>
+                            </div>
+
+                        <% } %>
+
+                    <% }) %>
+
+                </div>
+
+            <% } %>
+                
+        <% }) %>
+    <% }) %>
+
+
+    <% }else{ %>
+
+        <p class="basket-empty">
+            Your history is empty
+        </p>
+    
+        <% } %>
+
+</div>
+
+
+<%- include("../partials/footer.ejs") %>

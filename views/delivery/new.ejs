@@ -1,0 +1,57 @@
+<%- include("../partials/header.ejs") %>
+
+<div class="container address-new">
+
+    <h1>Add new address</h1>
+
+    <form action="/user/<%= currentUser._id %>/new_address" method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Set address name</label>
+            <input type="text" class="form-control" name="address[address_name]" placeholder="name">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Receiver name</label>
+            <input type="text" class="form-control" name="address[receiver]" placeholder="receiver">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Telephone</label>
+            <input type="number" class="form-control" name="address[tel]" placeholder="telephone">
+        </div>
+
+    <div class="mb-3">
+        <label class="form-label">Address</label>
+        <input type="text" class="form-control" name="address[houseaddress]" placeholder="address">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Sub-district</label>
+        <input type="text" class="form-control" name="address[sub_district]" placeholder="sub_district">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">District</label>
+        <input type="text" class="form-control" name="address[district]" placeholder="district">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Province</label>
+        <input type="text" class="form-control" name="address[province]" placeholder="province">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Zipcode</label>
+        <input type="number" class="form-control" name="address[zipcode]" placeholder="zipcode">
+    </div>
+    <!-- <div class="mb-3">
+        <label class="form-label">Description</label>
+        <input type="textarea" class="form-control" name="product[description]" placeholder="Description">
+    </div> -->
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/user/<%= currentUser._id %>/delivery" >Go back</a>
+    </form>
+</div>
+  <%- include("../partials/footer.ejs") %>

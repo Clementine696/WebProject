@@ -1,0 +1,37 @@
+<%- include("../partials/header.ejs") %>
+
+<!-- <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">BRUH</h1>
+        <p class="lead text-muted">Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh Bruh.</p>
+        <p>
+          <a href="/prints/new" class="btn btn-primary my-2">Add new print</a>
+        </p>
+      </div>
+    </div>
+  </section> -->
+
+  <div class="container-fluid bg-trasparent my-4 p-3 con-card" style="position: relative;">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+
+      <% products.forEach(function(products){ %>
+      <div class="col">
+        <div class="card h-100 shadow-sm"> <img src="<%= products.image %>" class="card-img" alt="...">
+            <div class="card-body">
+                <!-- <div class="label-top shadow-sm">Asus Rog</div> -->
+                <div class="clearfix mb-3"> 
+                  <!-- <span class="float-start badge rounded-pill bg-primary">ASUS Rog</span>  -->
+                  <span class="float-end price-hp"><%= products.price.toLocaleString(); %>฿</span> 
+                </div>
+                <h5 class="card-title"><%= products.name %></h5>
+                <div class="text-center my-4"> <a href="/products/<%= products._id %>" class="btn btn-warning">Check offer</a> </div>
+            </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+
+
+<%- include("../partials/footer.ejs") %>
